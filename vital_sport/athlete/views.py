@@ -6,8 +6,11 @@ from rest_framework.response import Response
 from .models import Athlete
 from .serializers import AthleteSerializer
 from rest_framework import generics, serializers
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from rest_framework.pagination import PageNumberPagination
+
+def index(request):
+    return render(request, 'index.html')
 
 
 class AthleteCreate(CreateAPIView):
