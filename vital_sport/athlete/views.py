@@ -29,6 +29,8 @@ class AthleteCreate(CreateAPIView):
                 sex=request.data.get('sex'),
                 weight=request.data.get('weight'),
                 height=request.data.get('height'),
+                blood_type=request.data.get('blood_type'),
+                sport=request.data.get('sport'),
                 phone=request.data.get('phone'),
                 email=request.data.get('email'),
                 contact_method=request.data.get('contact_method'),
@@ -62,14 +64,19 @@ class AthleteAll(generics.ListAPIView):
 class AthleteCRUD(RetrieveAPIView, UpdateAPIView, DestroyAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = AthleteSerializer
+    template_name = 'card.html'
 
-    def get_object(self):
+    def get_queryset(self):
         athlete_id = self.kwargs.get('athlete_id')
-        athlete = get_object_or_404(
-            Athlete, pk=athlete_id, coach=self.request.user)
-        return athlete
+        athletes = Athlete.objects.filter(id=athlete_id, coach=self.request.user)
+        return athletes
 
     def delete(self, request, *args, **kwargs):
         athlete = self.get_object()
         athlete.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def get(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = AthleteSerializer(queryset, many=True)
+        return render(request, self.template_name, {'athletes': serializer.data})

@@ -49,18 +49,17 @@
           >
             <img
               class="w-20 rounded-lg"
-              src="../media/athletes/spongebob.png"
+              src="{{ athlete.athlete_image }}"
             />
             <p class="">{{ athlete.first_name }} {{ athlete.last_name }}</p>
-            <p class="">Figure Skater</p>
-            <p class="">{{ athlete.weight }}</p>
-            <p class="">Heart Rate: 50</p>
-            <p class=""></p>
-            <p class=""></p>
-            <p class=""></p>
+            <p class="">{{ athlete.sport }}</p>
+            <p class="">{{ athlete.weight }}kg</p>
+            <p class="">{{ athlete.height }}ft</p>
+            <p class="">Blood Type:{{ athlete.blood_type}}</p>
+            <p class="">Heart Rate:50</p>
             <div class="pt-2 pb-2">
               <button
-                onclick="window.location.href = 'card1.html';"
+                onclick="window.location.href = 'http://127.0.0.1:1000/athlete/{{ athlete.id }}/';"
                 class="bg-red-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full"
               >
                 Check Details

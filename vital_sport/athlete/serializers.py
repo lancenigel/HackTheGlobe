@@ -8,5 +8,5 @@ class AthleteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Athlete
-        fields = ['id', 'first_name', 'last_name', 'ethnicity', 'sex', 'weight', 'height',
+        fields = ['id', 'first_name', 'last_name', 'ethnicity', 'sex', 'weight', 'height', 'blood_type', 'sport',
                   'phone', 'email', 'contact_method', 'coach', 'athlete_image']
