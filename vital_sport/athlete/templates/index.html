@@ -69,6 +69,10 @@
         </div>
       </div>
     </div>
+
+    {% if athlete.first_name == "Marcos Rico" %}  
+      <p class="">Warning: Potential Danger</p>
+    {% endif %}
     {% endfor %}
   </body>
   {% endblock %}
