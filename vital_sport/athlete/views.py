@@ -1,4 +1,3 @@
-from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from rest_framework import status
 from rest_framework.generics import CreateAPIView, DestroyAPIView, RetrieveAPIView, UpdateAPIView
 from rest_framework.permissions import IsAuthenticated
@@ -8,9 +7,8 @@ from .serializers import AthleteSerializer
 from rest_framework import generics, serializers
 from django.shortcuts import get_object_or_404, render
 from rest_framework.pagination import PageNumberPagination
-
-def index(request):
-    return render(request, 'index.html')
+from rest_framework.response import Response
+from django.shortcuts import render
 
 
 class AthleteCreate(CreateAPIView):
@@ -49,10 +47,17 @@ class AthleteAll(generics.ListAPIView):
     serializer_class = AthleteSerializer
     pagination_class = PageNumberPagination
     pagination_class.page_size = 10
+    template_name = 'index.html'
 
     def get_queryset(self):
         athletes = Athlete.objects.filter(coach=self.request.user)
         return athletes
+
+    def get(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = AthleteSerializer(queryset, many=True)
+        return render(request, self.template_name, {'athletes': serializer.data})
+
 
 class AthleteCRUD(RetrieveAPIView, UpdateAPIView, DestroyAPIView):
     permission_classes = [IsAuthenticated]
@@ -60,9 +65,10 @@ class AthleteCRUD(RetrieveAPIView, UpdateAPIView, DestroyAPIView):
 
     def get_object(self):
         athlete_id = self.kwargs.get('athlete_id')
-        athlete = get_object_or_404(Athlete, pk=athlete_id, coach=self.request.user)
+        athlete = get_object_or_404(
+            Athlete, pk=athlete_id, coach=self.request.user)
         return athlete
-    
+
     def delete(self, request, *args, **kwargs):
         athlete = self.get_object()
         athlete.delete()

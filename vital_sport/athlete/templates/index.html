@@ -1,15 +1,76 @@
-{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tailwindcss</title>
-    {% tailwind_css %}
-</head>
-<body>
-    <h1 class="font-bold">Hello Tailwindcss</h1>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tailwind Profile Card Template : Tailwind Toolbox</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+
+    <!-- Font Awesome if you need it
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
+    <!--Replace with your tailwind.css once created-->
+  </head>
+  {% block content %}
+  <body
+    class="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover"
+    style="
+      background-image: url('https://mcdn.wallpapersafari.com/medium/35/27/3rEZzM.jpg');
+    "
+  >
+    <div class="bg-gray-800 flex justify-between py-3 px-6 opacity-85">
+      <p class="text-red-300 font-bold text-base px-6 py-2">
+        <a href="http://127.0.0.1:1000/athlete/">Vital Sport</a>
+      </p>
+      <button
+        class="text-red-300 font-bold hover:bg-red-900 border border-red-300 rounded px-6 py-2"
+      >
+        Add Athlete
+      </button>
+    </div>
+
+    {% for athlete in athletes %}
+
+    <div class="max-w-4xl flex items-center py-5 mx-auto">
+      <div
+        id="profile"
+        class="w-full lg:w-5/5 rounded-lg lg:rounded-l-lg shadow-2xl bg-white opacity-75 mx-6 lg:mx-0 hover:opacity-100"
+      >
+        <div class="p-4 w-300 text-center lg:text-left">
+          <div
+            class="mt-1 pb-16 lg:pb-0 w-4/5 lg:w-full mx-auto flex flex-wrap items-center justify-between"
+          >
+            <img
+              class="w-20 rounded-lg"
+              src="../media/athletes/spongebob.png"
+            />
+            <p class="">{{ athlete.first_name }} {{ athlete.last_name }}</p>
+            <p class="">Figure Skater</p>
+            <p class="">{{ athlete.weight }}</p>
+            <p class="">Heart Rate: 50</p>
+            <p class=""></p>
+            <p class=""></p>
+            <p class=""></p>
+            <div class="pt-2 pb-2">
+              <button
+                onclick="window.location.href = 'card1.html';"
+                class="bg-red-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full"
+              >
+                Check Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </body>
+  {% endblock %}
 </html>
