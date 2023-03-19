@@ -22,7 +22,7 @@
   <body
     class="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover"
     style="
-      background-image: url('https://mcdn.wallpapersafari.com/medium/35/27/3rEZzM.jpg');
+      background-image: url('https://images-ext-2.discordapp.net/external/oUcYBNDDUcxn6a9UHuRd3STYWnkJpG-V3sJKKOmbtlA/https/static.vecteezy.com/system/resources/previews/012/142/685/original/neutral-background-with-flat-curve-shape-ornament-free-vector.jpg?width=1039&height=584');
     "
   >
     <div class="bg-gray-800 flex justify-between py-3 px-6 opacity-85">
@@ -56,7 +56,11 @@
             <p class="">{{ athlete.weight }}kg</p>
             <p class="">{{ athlete.height }}ft</p>
             <p class="">Blood Type:{{ athlete.blood_type}}</p>
+            {% if athlete.first_name == "Marcos Rico" %}  
+            <p class="">Heart Rate:180</p>
+            {% else %}
             <p class="">Heart Rate:50</p>
+            {% endif %}
             <div class="pt-2 pb-2">
               <button
                 onclick="window.location.href = 'http://127.0.0.1:1000/athlete/{{ athlete.id }}/';"
@@ -71,7 +75,7 @@
     </div>
 
     {% if athlete.first_name == "Marcos Rico" %}  
-      <p class="">Warning: Potential Danger</p>
+      <p class="text-center text-red-600">Warning: Potential Danger</p>
     {% endif %}
     {% endfor %}
   </body>
